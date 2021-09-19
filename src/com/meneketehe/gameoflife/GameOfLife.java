@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GameOfLife implements CellularAutomaton {
     Grid world;
 
-    GameOfLife(int rows, int cols, ArrayList<Point> aliveCells) {
+    public GameOfLife(int rows, int cols, ArrayList<Point> aliveCells) {
         this.world = new Grid(rows, cols, aliveCells);
     }
 

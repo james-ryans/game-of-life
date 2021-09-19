@@ -1,35 +1,39 @@
 package com.meneketehe.gameoflife.gui;
 
+import com.meneketehe.grid.Point;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class GridPanel extends JPanel {
     CellPanel[][] cellPanels;
 
     int rows;
     int cols;
-    boolean[][] cells;
 
-    GridPanel(int rows, int cols, boolean[][] cells) {
+    GridPanel(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        this.cells = cells;
 
         GridLayout layout = new GridLayout(rows, cols, 1, 1);
         setLayout(layout);
 
-        initializeCellPanels(rows, cols);
+        initializeCellPanels();
 
         setBackground(Color.GRAY);
         setVisible(true);
     }
 
-    private void initializeCellPanels(int rows, int cols) {
+    private void initializeCellPanels() {
         this.cellPanels = new CellPanel[rows][cols];
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                cellPanels[i][j] = new CellPanel(cells[i][j]);
+                cellPanels[i][j] = new CellPanel();
+                addClickListener(cellPanels[i][j]);
                 add(cellPanels[i][j]);
             }
         }
@@ -45,5 +49,31 @@ public class GridPanel extends JPanel {
                 }
             }
         }
+    }
+
+    public ArrayList<Point> getAliveCellsList() {
+        ArrayList<Point> aliveCells = new ArrayList<>();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (cellPanels[i][j].isAlive()) {
+                    aliveCells.add(new Point(i, j));
+                }
+            }
+        }
+
+        return aliveCells;
+    }
+
+    private void addClickListener(CellPanel cellPanel) {
+        cellPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (cellPanel.isAlive()) {
+                    cellPanel.setDead();
+                } else {
+                    cellPanel.setAlive();
+                }
+            }
+        });
     }
 }
