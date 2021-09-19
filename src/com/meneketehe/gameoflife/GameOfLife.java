@@ -9,16 +9,16 @@ import java.util.ArrayList;
 public class GameOfLife implements CellularAutomaton {
     Grid world;
 
-    GameOfLife(int width, int height, ArrayList<Point> aliveCells) {
-        this.world = new Grid(width, height, aliveCells);
+    GameOfLife(int rows, int cols, ArrayList<Point> aliveCells) {
+        this.world = new Grid(rows, cols, aliveCells);
     }
 
     @Override
     public void lifeCycle() {
-        Grid futureWorld = new Grid(world.getWidth(), world.getHeight());
+        Grid futureWorld = new Grid(world.getRows(), world.getCols());
 
-        for (int x = 0; x < world.getHeight(); x++) {
-            for (int y = 0; y < world.getWidth(); y++) {
+        for (int x = 0; x < world.getRows(); x++) {
+            for (int y = 0; y < world.getCols(); y++) {
                 if (rule(world.getCell(x, y))) {
                     futureWorld.populate(x, y);
                 } else {
@@ -34,5 +34,9 @@ public class GameOfLife implements CellularAutomaton {
     public boolean rule(Cell cell) {
         return (cell.isAlive() && 2 <= cell.getNeighbours() && cell.getNeighbours() <= 3)
                 || (cell.isDead() && cell.getNeighbours() == 3);
+    }
+
+    public Grid getWorld() {
+        return world;
     }
 }

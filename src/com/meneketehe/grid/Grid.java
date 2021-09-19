@@ -3,23 +3,23 @@ package com.meneketehe.grid;
 import java.util.ArrayList;
 
 public class Grid {
-    int width, height;
+    int cols, rows;
     Cell[][] cells;
 
-    public Grid(int width, int height) {
-        this.width = width;
-        this.height = height;
-        this.cells = new Cell[height][width];
+    public Grid(int cols, int rows) {
+        this.cols = cols;
+        this.rows = rows;
+        this.cells = new Cell[rows][cols];
 
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 this.cells[i][j] = new Cell(i, j);
             }
         }
     }
 
-    public Grid(int width, int height, ArrayList<Point> activeCells) {
-        this(width, height);
+    public Grid(int cols, int rows, ArrayList<Point> activeCells) {
+        this(cols, rows);
 
         for (Point point : activeCells) {
             populate(point.getX(), point.getY());
@@ -52,12 +52,12 @@ public class Grid {
         }
     }
 
-    public int getWidth() {
-        return width;
+    public int getCols() {
+        return cols;
     }
 
-    public int getHeight() {
-        return height;
+    public int getRows() {
+        return rows;
     }
 
     public Cell getCell(int x, int y) {
@@ -65,9 +65,9 @@ public class Grid {
     }
 
     public boolean[][] show() {
-        boolean[][] grid = new boolean[height][width];
-        for (int x = 0; x < height; x++) {
-            for (int y = 0; y < width; y++) {
+        boolean[][] grid = new boolean[rows][cols];
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < cols; y++) {
                 grid[x][y] = cells[x][y].isAlive();
             }
         }
@@ -76,6 +76,6 @@ public class Grid {
     }
 
     private boolean isWithinBoundaries(Point point) {
-        return 0 <= point.getX() && point.getX() < height && 0 <= point.getY() && point.getY() < width;
+        return 0 <= point.getX() && point.getX() < rows && 0 <= point.getY() && point.getY() < cols;
     }
 }

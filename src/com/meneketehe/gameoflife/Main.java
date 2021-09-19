@@ -1,14 +1,15 @@
 package com.meneketehe.gameoflife;
 
+import com.meneketehe.gameoflife.gui.App;
 import com.meneketehe.grid.Point;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int n = 10;
-        int m = 20;
+        int n = 40;
         ArrayList<Point> activeCells = new ArrayList<Point>(
                 List.of(
                         new Point(1, 3),
@@ -18,9 +19,8 @@ public class Main {
                         new Point(3, 3)
                 )
         );
-        GameOfLife game = new GameOfLife(m, n, activeCells);
+        GameOfLife game = new GameOfLife(n, n, activeCells);
 
-        App app = new App(game);
-        app.run();
+        SwingUtilities.invokeLater(new App(game));
     }
 }
