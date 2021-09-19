@@ -18,11 +18,53 @@ public class Grid {
         }
     }
 
-    public Grid(int width, int height, ArrayList<Cell> activeCells) {
+    public Grid(int width, int height, ArrayList<Point> activeCells) {
         this(width, height);
 
-        for (Cell cell : activeCells) {
-            this.cells[cell.getX()][cell.getY()].setAlive();
+        for (Point point : activeCells) {
+            populate(point.getX(), point.getY());
         }
+    }
+
+    public void populate(int x, int y) {
+        if (cells[x][y].isAlive()) {
+            return;
+        }
+
+        cells[x][y].setAlive();
+        for (Point adjacent : cells[x][y].getAdjacents()) {
+            if (isWithinBoundaries(adjacent)) {
+                cells[adjacent.getX()][adjacent.getY()].addNeighbour();
+            }
+        }
+    }
+
+    public void unpopulate(int x, int y) {
+        if (cells[x][y].isDead()) {
+            return;
+        }
+
+        cells[x][y].setDead();
+        for (Point adjacent : cells[x][y].getAdjacents()) {
+            if (isWithinBoundaries(adjacent)) {
+                cells[adjacent.getX()][adjacent.getY()].subtractNeighbour();
+            }
+        }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Cell getCell(int x, int y) {
+        return cells[x][y];
+    }
+
+    private boolean isWithinBoundaries(Point point) {
+        return 0 <= point.getX() && point.getX() < height && 0 <= point.getY() && point.getY() < width;
     }
 }
