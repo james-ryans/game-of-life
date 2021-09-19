@@ -18,7 +18,7 @@ public class Main {
                         new Point(3, 3)
                 )
         );
-        GameOfLife game = new GameOfLife(n, m, activeCells);
+        GameOfLife game = new GameOfLife(m, n, activeCells);
 
         App app = new App(game);
         app.run();

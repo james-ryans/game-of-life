@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class GameOfLife implements CellularAutomaton {
     Grid world;
 
-    GameOfLife(int height, int width, ArrayList<Point> aliveCells) {
-        this.world = new Grid(height, width, aliveCells);
+    GameOfLife(int width, int height, ArrayList<Point> aliveCells) {
+        this.world = new Grid(width, height, aliveCells);
     }
 
     @Override
     public void lifeCycle() {
-        Grid futureWorld = new Grid(world.getHeight(), world.getWidth());
+        Grid futureWorld = new Grid(world.getWidth(), world.getHeight());
 
         for (int x = 0; x < world.getHeight(); x++) {
             for (int y = 0; y < world.getWidth(); y++) {

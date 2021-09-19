@@ -6,9 +6,9 @@ public class Grid {
     int width, height;
     Cell[][] cells;
 
-    public Grid(int height, int width) {
-        this.height = height;
+    public Grid(int width, int height) {
         this.width = width;
+        this.height = height;
         this.cells = new Cell[height][width];
 
         for (int i = 0; i < height; i++) {
@@ -18,8 +18,8 @@ public class Grid {
         }
     }
 
-    public Grid(int height, int width, ArrayList<Point> activeCells) {
-        this(height, width);
+    public Grid(int width, int height, ArrayList<Point> activeCells) {
+        this(width, height);
 
         for (Point point : activeCells) {
             populate(point.getX(), point.getY());
