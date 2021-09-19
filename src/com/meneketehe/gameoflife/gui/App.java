@@ -50,6 +50,7 @@ public class App extends JFrame implements Runnable {
 
     private void play() {
         playButton.setText("Stop");
+        gridPanel.setEnabled(false);
 
         GameOfLife game = new GameOfLife(rows, cols, gridPanel.getAliveCellsList());
 
@@ -61,6 +62,7 @@ public class App extends JFrame implements Runnable {
 
     private void stop() {
         playButton.setText("Start");
+        gridPanel.setEnabled(true);
 
         future.cancel(true);
     }

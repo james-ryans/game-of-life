@@ -68,10 +68,12 @@ public class GridPanel extends JPanel {
         cellPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (cellPanel.isAlive()) {
-                    cellPanel.setDead();
-                } else {
-                    cellPanel.setAlive();
+                if (isEnabled()) {
+                    if (cellPanel.isAlive()) {
+                        cellPanel.setDead();
+                    } else {
+                        cellPanel.setAlive();
+                    }
                 }
             }
         });
