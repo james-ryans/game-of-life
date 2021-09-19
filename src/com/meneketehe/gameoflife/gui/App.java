@@ -24,6 +24,7 @@ public class App extends JFrame implements Runnable {
 
     public void run() {
         frame = new JFrame("Game Of Life");
+        frame.getContentPane().setBackground(Color.GRAY);
         frame.setSize(new Dimension(WIDTH, HEIGHT));
         frame.setResizable(false);
 
