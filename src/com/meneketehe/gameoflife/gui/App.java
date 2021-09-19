@@ -60,7 +60,7 @@ public class App extends JFrame implements Runnable {
         future = executorService.scheduleAtFixedRate(() -> {
             ArrayList<Cell> changedCells = game.lifeCycle();
             gridPanel.repaintGrid(changedCells);
-        }, 500, 500, TimeUnit.MILLISECONDS);
+        }, 1000, 1000, TimeUnit.MILLISECONDS);
     }
 
     private void stop() {

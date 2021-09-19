@@ -27,7 +27,7 @@ public class GameOfLife implements CellularAutomaton {
                 }
 
                 if (world.getCell(x, y).getState() != futureWorld.getCell(x, y).getState()) {
-                    changedCells.add(world.getCell(x, y));
+                    changedCells.add(futureWorld.getCell(x, y));
                 }
             }
         }
