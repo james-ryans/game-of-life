@@ -26,6 +26,10 @@ public class Cell {
         return point.getY();
     }
 
+    public State getState() {
+        return state;
+    }
+
     public void setAlive() {
         state = State.ALIVE;
     }

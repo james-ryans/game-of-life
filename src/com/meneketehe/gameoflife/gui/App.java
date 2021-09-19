@@ -1,9 +1,11 @@
 package com.meneketehe.gameoflife.gui;
 
 import com.meneketehe.gameoflife.GameOfLife;
+import com.meneketehe.grid.Cell;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -56,9 +58,9 @@ public class App extends JFrame implements Runnable {
         GameOfLife game = new GameOfLife(rows, cols, gridPanel.getAliveCellsList());
 
         future = executorService.scheduleAtFixedRate(() -> {
-            game.lifeCycle();
-            gridPanel.repaintGrid(game.getWorld().show());
-        }, 400, 400, TimeUnit.MILLISECONDS);
+            ArrayList<Cell> changedCells = game.lifeCycle();
+            gridPanel.repaintGrid(changedCells);
+        }, 500, 500, TimeUnit.MILLISECONDS);
     }
 
     private void stop() {

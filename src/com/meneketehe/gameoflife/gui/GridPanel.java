@@ -1,5 +1,6 @@
 package com.meneketehe.gameoflife.gui;
 
+import com.meneketehe.grid.Cell;
 import com.meneketehe.grid.Point;
 
 import javax.swing.*;
@@ -39,16 +40,16 @@ public class GridPanel extends JPanel {
         }
     }
 
-    public void repaintGrid(boolean[][] cellsIsAlive) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (cellsIsAlive[i][j]) {
-                    cellPanels[i][j].setAlive();
-                } else {
-                    cellPanels[i][j].setDead();
-                }
+    public void repaintGrid(ArrayList<Cell> changedCells) {
+        for (Cell cell : changedCells) {
+            if (cell.isAlive()) {
+                cellPanels[cell.getX()][cell.getY()].setAlive();
+            } else {
+                cellPanels[cell.getX()][cell.getY()].setDead();
             }
         }
+
+        repaint();
     }
 
     public ArrayList<Point> getAliveCellsList() {

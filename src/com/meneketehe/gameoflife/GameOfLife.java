@@ -14,7 +14,8 @@ public class GameOfLife implements CellularAutomaton {
     }
 
     @Override
-    public void lifeCycle() {
+    public ArrayList<Cell> lifeCycle() {
+        ArrayList<Cell> changedCells = new ArrayList<>();
         Grid futureWorld = new Grid(world.getRows(), world.getCols());
 
         for (int x = 0; x < world.getRows(); x++) {
@@ -24,10 +25,16 @@ public class GameOfLife implements CellularAutomaton {
                 } else {
                     futureWorld.unpopulate(x, y);
                 }
+
+                if (world.getCell(x, y).getState() != futureWorld.getCell(x, y).getState()) {
+                    changedCells.add(world.getCell(x, y));
+                }
             }
         }
 
         world = futureWorld;
+
+        return changedCells;
     }
 
     @Override
