@@ -33,9 +33,8 @@ public class Grid {
 
         cells[x][y].setAlive();
         for (Point adjacent : cells[x][y].getAdjacents()) {
-            if (isWithinBoundaries(adjacent)) {
-                cells[adjacent.getX()][adjacent.getY()].addNeighbour();
-            }
+            adjacent = makeCircularWithinBoundaries(adjacent);
+            cells[adjacent.getX()][adjacent.getY()].addNeighbour();
         }
     }
 
@@ -46,9 +45,8 @@ public class Grid {
 
         cells[x][y].setDead();
         for (Point adjacent : cells[x][y].getAdjacents()) {
-            if (isWithinBoundaries(adjacent)) {
-                cells[adjacent.getX()][adjacent.getY()].subtractNeighbour();
-            }
+            adjacent = makeCircularWithinBoundaries(adjacent);
+            cells[adjacent.getX()][adjacent.getY()].subtractNeighbour();
         }
     }
 
@@ -75,7 +73,7 @@ public class Grid {
         return grid;
     }
 
-    private boolean isWithinBoundaries(Point point) {
-        return 0 <= point.getX() && point.getX() < rows && 0 <= point.getY() && point.getY() < cols;
+    private Point makeCircularWithinBoundaries(Point point) {
+        return new Point((point.getX() + rows) % rows, (point.getY() + cols) % cols);
     }
 }
