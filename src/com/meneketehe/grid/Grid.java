@@ -6,10 +6,10 @@ public class Grid {
     int width, height;
     Cell[][] cells;
 
-    public Grid(int width, int height) {
-        this.width = width;
+    public Grid(int height, int width) {
         this.height = height;
-        this.cells = new Cell[width][height];
+        this.width = width;
+        this.cells = new Cell[height][width];
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -18,8 +18,8 @@ public class Grid {
         }
     }
 
-    public Grid(int width, int height, ArrayList<Point> activeCells) {
-        this(width, height);
+    public Grid(int height, int width, ArrayList<Point> activeCells) {
+        this(height, width);
 
         for (Point point : activeCells) {
             populate(point.getX(), point.getY());
@@ -62,6 +62,17 @@ public class Grid {
 
     public Cell getCell(int x, int y) {
         return cells[x][y];
+    }
+
+    public boolean[][] show() {
+        boolean[][] grid = new boolean[height][width];
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
+                grid[x][y] = cells[x][y].isAlive();
+            }
+        }
+
+        return grid;
     }
 
     private boolean isWithinBoundaries(Point point) {

@@ -8,6 +8,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         int n = 10;
+        int m = 20;
         ArrayList<Point> activeCells = new ArrayList<Point>(
                 List.of(
                         new Point(1, 3),
@@ -17,8 +18,9 @@ public class Main {
                         new Point(3, 3)
                 )
         );
+        GameOfLife game = new GameOfLife(n, m, activeCells);
 
-        GameOfLife game = new GameOfLife(n, n, activeCells);
-        game.simulate();
+        App app = new App(game);
+        app.run();
     }
 }
