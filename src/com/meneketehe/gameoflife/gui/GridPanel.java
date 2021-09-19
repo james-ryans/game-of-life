@@ -10,15 +10,15 @@ public class GridPanel extends JPanel {
     int cols;
     boolean[][] cells;
 
-    GridPanel(int rows, int cols) {
+    GridPanel(int rows, int cols, boolean[][] cells) {
         this.rows = rows;
         this.cols = cols;
+        this.cells = cells;
 
         GridLayout layout = new GridLayout(rows, cols, 1, 1);
         setLayout(layout);
 
         initializeCellPanels(rows, cols);
-        initializeCells(rows, cols);
 
         setBackground(Color.GRAY);
         setVisible(true);
@@ -29,14 +29,10 @@ public class GridPanel extends JPanel {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                cellPanels[i][j] = new CellPanel();
+                cellPanels[i][j] = new CellPanel(cells[i][j]);
                 add(cellPanels[i][j]);
             }
         }
-    }
-
-    private void initializeCells(int rows, int cols) {
-        cells = new boolean[rows][cols];
     }
 
     public void repaintGrid(boolean[][] cellsIsAlive) {

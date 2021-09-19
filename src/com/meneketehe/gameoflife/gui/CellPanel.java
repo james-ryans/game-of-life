@@ -8,6 +8,14 @@ public class CellPanel extends JPanel {
         setDead();
     }
 
+    CellPanel(boolean isAlive) {
+        if (isAlive) {
+            setAlive();
+        } else {
+            setDead();
+        }
+    }
+
     public void setAlive() {
         setBackground(new Color(192, 192, 192));
     }

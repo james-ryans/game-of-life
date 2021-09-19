@@ -16,7 +16,13 @@ public class Main {
                         new Point(2, 1),
                         new Point(2, 3),
                         new Point(3, 2),
-                        new Point(3, 3)
+                        new Point(3, 3),
+                        new Point(4, 13),
+                        new Point(4, 14),
+                        new Point(4, 15),
+                        new Point(5, 12),
+                        new Point(5, 13),
+                        new Point(5, 14)
                 )
         );
         GameOfLife game = new GameOfLife(n, n, activeCells);

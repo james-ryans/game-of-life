@@ -12,6 +12,8 @@ public class App extends JFrame implements Runnable {
     private static int WIDTH = 800;
     private static int HEIGHT = 800;
 
+    private JFrame frame;
+    private TopPanel topPanel;
     private GridPanel gridPanel;
 
     GameOfLife game;
@@ -19,11 +21,14 @@ public class App extends JFrame implements Runnable {
     public App(GameOfLife game) {
         this.game = game;
 
-        JFrame frame = new JFrame("Game Of Life");
+        frame = new JFrame("Game Of Life");
         frame.setSize(new Dimension(WIDTH, HEIGHT));
         frame.setResizable(false);
 
-        gridPanel = new GridPanel(game.getWorld().getRows(), game.getWorld().getCols());
+        topPanel = new TopPanel();
+        frame.add(topPanel, BorderLayout.PAGE_START);
+
+        gridPanel = new GridPanel(game.getWorld().getRows(), game.getWorld().getCols(), game.getWorld().show());
         frame.add(gridPanel, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,8 +38,10 @@ public class App extends JFrame implements Runnable {
     public void run() {
         final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleAtFixedRate(() -> {
-            gridPanel.repaintGrid(game.getWorld().show());
-            game.lifeCycle();
+            if (topPanel.simulate) {
+                game.lifeCycle();
+                gridPanel.repaintGrid(game.getWorld().show());
+            }
         }, 0, 400, TimeUnit.MILLISECONDS);
     }
 }
