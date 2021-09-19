@@ -35,6 +35,6 @@ public class App extends JFrame implements Runnable {
         executorService.scheduleAtFixedRate(() -> {
             gridPanel.repaintGrid(game.getWorld().show());
             game.lifeCycle();
-        }, 0, 500, TimeUnit.MILLISECONDS);
+        }, 0, 400, TimeUnit.MILLISECONDS);
     }
 }
